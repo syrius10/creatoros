@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabaseServer'
 import { redirect } from 'next/navigation'
 import { OrgMemberWithOrg } from '@/types/database'
+import OrgSwitcher from './org-switcher' // Add this import
 
 export default async function Dashboard() {
   try {
@@ -37,7 +38,10 @@ export default async function Dashboard() {
           <div className="px-4 py-6 sm:px-0">
             <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
             <div className="mt-8">
-              <h2 className="text-xl font-semibold">Your Organizations</h2>
+              {/* Add the OrgSwitcher component here */}
+              <OrgSwitcher />
+              
+              <h2 className="text-xl font-semibold mt-8">Your Organizations</h2>
               <ul className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {orgsWithTyping?.map(({ org }) => (
                   <li key={org.id} className="bg-white overflow-hidden shadow rounded-lg">
