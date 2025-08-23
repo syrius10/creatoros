@@ -1,11 +1,11 @@
 import { createClient } from '@/lib/supabaseServer'
-import { NextResponse } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 
 export async function POST(
-  request: Request,
+  request: NextRequest, // Use NextRequest instead of Request
   { params }: { params: Promise<{ token: string }> }
-) {
-  const { token } = await params // Destructure after awaiting
+): Promise<NextResponse> { // Add explicit return type
+  const { token } = await params
   const supabase = await createClient()
   const {
     data: { session },
@@ -19,7 +19,7 @@ export async function POST(
   const { data: invite, error: inviteError } = await supabase
     .from('invites')
     .select('*')
-    .eq('token', token) // Use token instead of params.token
+    .eq('token', token)
     .gte('expires_at', new Date().toISOString())
     .single()
 

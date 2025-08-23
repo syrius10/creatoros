@@ -1,12 +1,12 @@
 import { createClient } from '@/lib/supabaseServer'
-import { NextResponse } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 import { randomUUID } from 'crypto'
 
 export async function POST(
-  request: Request,
+  request: NextRequest, // Use NextRequest instead of Request
   { params }: { params: Promise<{ orgId: string }> }
-) {
-  const { orgId } = await params // Destructure after awaiting
+): Promise<NextResponse> { // Add explicit return type
+  const { orgId } = await params
   const supabase = await createClient()
   const {
     data: { session },
@@ -22,7 +22,7 @@ export async function POST(
   const { data: member } = await supabase
     .from('org_members')
     .select('role')
-    .eq('org_id', orgId) // Use orgId instead of params.orgId
+    .eq('org_id', orgId)
     .eq('profile_id', session.user.id)
     .single()
 
@@ -37,7 +37,7 @@ export async function POST(
   const { data: invite, error } = await supabase
     .from('invites')
     .insert({
-      org_id: orgId, // Use orgId instead of params.orgId
+      org_id: orgId,
       email,
       role,
       token,
