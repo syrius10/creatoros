@@ -4,8 +4,9 @@ import { randomUUID } from 'crypto'
 
 export async function POST(
   request: Request,
-  { params }: { params: { orgId: string } }
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
+  const { orgId } = await params // Destructure after awaiting
   const supabase = await createClient()
   const {
     data: { session },
@@ -21,7 +22,7 @@ export async function POST(
   const { data: member } = await supabase
     .from('org_members')
     .select('role')
-    .eq('org_id', params.orgId)
+    .eq('org_id', orgId) // Use orgId instead of params.orgId
     .eq('profile_id', session.user.id)
     .single()
 
@@ -36,7 +37,7 @@ export async function POST(
   const { data: invite, error } = await supabase
     .from('invites')
     .insert({
-      org_id: params.orgId,
+      org_id: orgId, // Use orgId instead of params.orgId
       email,
       role,
       token,
