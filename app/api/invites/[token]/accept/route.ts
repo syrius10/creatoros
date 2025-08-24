@@ -2,19 +2,15 @@
 import { createClient } from '@/lib/supabaseServer'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Define the parameter type interface
-interface RouteParams {
-  params: { token: string }
-}
-
-// Use the correct syntax for route handlers
+// Correct syntax for Next.js 15.5.0 App Router
 export async function POST(
   request: NextRequest,
-  context: { params: { token: string } }
+  { params }: { params: Promise<{ token: string }> }
 ) {
   try {
+    // Await the params to get the actual values
+    const { token } = await params
     const supabase = await createClient()
-    const { token } = context.params
 
     // Verify the invite exists and is valid
     const { data: invite, error: inviteError } = await supabase
@@ -85,15 +81,3 @@ export async function POST(
     )
   }
 }
-
-// GET handler - REMOVE THIS if you don't need it
-// API routes typically shouldn't handle GET for redirects - use pages instead
-/*
-export async function GET(
-  request: NextRequest,
-  context: { params: { token: string } }
-) {
-  // Redirect to a page component that handles the UI
-  return NextResponse.redirect(new URL('/invites/accept', request.url))
-}
-*/
