@@ -2,14 +2,16 @@
 import { createClient } from '@/lib/supabaseServer'
 import { redirect } from 'next/navigation'
 
-// Define the props interface with readonly modifier
+// Define the props interface with Promise searchParams
 interface SuccessPageProps {
-  readonly searchParams: { 
-    readonly session_id: string 
-  }
+  readonly searchParams: Promise<{ session_id: string }>
 }
 
-export default async function SuccessPage({ searchParams }: SuccessPageProps) {
+export default async function SuccessPage(props: SuccessPageProps) {
+  // Await the searchParams promise
+  const searchParams = await props.searchParams
+  const session_id = searchParams.session_id
+  
   const supabase = await createClient()
   const { data: { session } } = await supabase.auth.getSession()
 
@@ -21,7 +23,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
   const { data: order } = await supabase
     .from('orders')
     .select('*')
-    .eq('stripe_session_id', searchParams.session_id)
+    .eq('stripe_session_id', session_id)
     .single()
 
   if (!order || order.status !== 'paid') {
