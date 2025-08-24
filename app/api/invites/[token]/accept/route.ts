@@ -2,14 +2,19 @@
 import { createClient } from '@/lib/supabaseServer'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Use NextRequest instead of Request and proper params typing
+// Define the parameter type interface
+interface RouteParams {
+  params: { token: string }
+}
+
+// Use the correct syntax for route handlers
 export async function POST(
   request: NextRequest,
-  { params }: { params: { token: string } }
+  context: { params: { token: string } }
 ) {
   try {
     const supabase = await createClient()
-    const { token } = params
+    const { token } = context.params
 
     // Verify the invite exists and is valid
     const { data: invite, error: inviteError } = await supabase
@@ -81,44 +86,14 @@ export async function POST(
   }
 }
 
-// Also add a GET handler for direct link visits
+// GET handler - REMOVE THIS if you don't need it
+// API routes typically shouldn't handle GET for redirects - use pages instead
+/*
 export async function GET(
   request: NextRequest,
-  { params }: { params: { token: string } }
+  context: { params: { token: string } }
 ) {
-  try {
-    const supabase = await createClient()
-    const { token } = params
-
-    // Verify the invite exists and is valid
-    const { data: invite, error: inviteError } = await supabase
-      .from('invites')
-      .select('*, orgs(name)')
-      .eq('token', token)
-      .single()
-
-    if (inviteError || !invite) {
-      return NextResponse.redirect(new URL('/invite-expired', request.url))
-    }
-
-    // Check if invite is expired
-    if (new Date(invite.expires_at) < new Date()) {
-      return NextResponse.redirect(new URL('/invite-expired', request.url))
-    }
-
-    // If user is logged in, redirect to accept page
-    const { data: { session } } = await supabase.auth.getSession()
-    
-    if (session) {
-      // Redirect to a page that will automatically accept the invite
-      return NextResponse.redirect(new URL(`/invites/${token}/accept`, request.url))
-    }
-
-    // If not logged in, redirect to signin with invite token
-    return NextResponse.redirect(new URL(`/signin?invite_token=${token}`, request.url))
-
-  } catch (error: any) {
-    console.error('Invite GET error:', error)
-    return NextResponse.redirect(new URL('/invite-error', request.url))
-  }
+  // Redirect to a page component that handles the UI
+  return NextResponse.redirect(new URL('/invites/accept', request.url))
 }
+*/
