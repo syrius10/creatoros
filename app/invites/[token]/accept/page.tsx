@@ -5,9 +5,15 @@ import { createClient } from '@/lib/supabaseBrowser'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function AcceptInvitePage({ params }: { params: { token: string } }) {
+// Update props to accept Promise params
+interface AcceptInvitePageProps {
+  params: Promise<{ token: string }>
+}
+
+export default function AcceptInvitePage(props: AcceptInvitePageProps) {
   const [status, setStatus] = useState('loading')
   const [message, setMessage] = useState('Processing your invite...')
+  const [token, setToken] = useState<string>('')
   const router = useRouter()
 
   // Extract nested ternary to separate function
@@ -25,18 +31,30 @@ export default function AcceptInvitePage({ params }: { params: { token: string }
   }
 
   useEffect(() => {
+    // Resolve the params promise
+    async function resolveParams() {
+      const resolvedParams = await props.params
+      setToken(resolvedParams.token)
+    }
+    
+    resolveParams()
+  }, [props.params])
+
+  useEffect(() => {
     async function acceptInvite() {
+      if (!token) return // Wait until token is available
+
       try {
         const supabase = createClient()
         const { data: { session } } = await supabase.auth.getSession()
 
         if (!session) {
           // Redirect to signin with invite token
-          router.push(`/signin?invite_token=${params.token}`)
+          router.push(`/signin?invite_token=${token}`)
           return
         }
 
-        const response = await fetch(`/api/invites/${params.token}/accept`, {
+        const response = await fetch(`/api/invites/${token}/accept`, {
           method: 'POST',
         })
 
@@ -62,8 +80,10 @@ export default function AcceptInvitePage({ params }: { params: { token: string }
       }
     }
 
-    acceptInvite()
-  }, [params.token, router])
+    if (token) {
+      acceptInvite()
+    }
+  }, [token, router])
 
   return (
     <div className="min-h-screen flex items-center justify-center">
