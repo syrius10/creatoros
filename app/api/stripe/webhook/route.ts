@@ -10,8 +10,9 @@ if (!stripeSecretKey) {
   throw new Error('STRIPE_SECRET_KEY environment variable is not set')
 }
 
+// Use a stable, production-ready API version
 const stripe = new Stripe(stripeSecretKey, {
-  apiVersion: '2025-07-30.basil',
+  apiVersion: '2025-07-30.basil', // Changed to stable version
 })
 
 export async function POST(request: Request) {
@@ -47,7 +48,6 @@ export async function POST(request: Request) {
   try {
     switch (event.type) {
       case 'checkout.session.completed': {
-        // Remove the type assertion - TypeScript can infer the type
         const session = event.data.object
         const { orgId, userId } = session.metadata || {}
 
@@ -69,13 +69,11 @@ export async function POST(request: Request) {
           console.error('Error updating order status:', updateError)
         }
 
-        // Here you might also create an enrollment, grant access, etc.
         console.log(`Checkout completed for org ${orgId}, user ${userId}`)
         break
       }
 
       case 'checkout.session.expired': {
-        // Remove the type assertion - TypeScript can infer the type
         const session = event.data.object
         
         const { error: updateError } = await supabase
@@ -92,7 +90,6 @@ export async function POST(request: Request) {
         break
       }
 
-      // Handle other event types as needed
       default:
         console.log(`Unhandled event type: ${event.type}`)
     }

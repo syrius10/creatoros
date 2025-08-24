@@ -3,8 +3,15 @@ import { createClient } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-07-30.basil',
+// Initialize Stripe with proper error handling
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY
+
+if (!stripeSecretKey) {
+  throw new Error('STRIPE_SECRET_KEY environment variable is not set')
+}
+
+const stripe = new Stripe(stripeSecretKey, {
+  apiVersion: '2025-07-30.basil', // Use a stable API version
 })
 
 export async function POST() {
