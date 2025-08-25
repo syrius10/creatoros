@@ -12,4 +12,4 @@ const nextConfig = {
   transpilePackages: ['@supabase/ssr', '@supabase/supabase-js'],
 }
 
-module.exports = nextConfigver
+module.exports = nextConfig  // ← Make sure it says "nextConfig" NOT "nextConfigver"
