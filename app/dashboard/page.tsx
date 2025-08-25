@@ -1,7 +1,10 @@
+// app/dashboard/page.tsx
 import { createClient } from '@/lib/supabaseServer'
 import { redirect } from 'next/navigation'
 import { OrgMemberWithOrg } from '@/types/database'
-import OrgSwitcher from './org-switcher' // Add this import
+import OrgSwitcher from './org-switcher'
+
+export const dynamic = 'force-dynamic'
 
 export default async function Dashboard() {
   try {
@@ -24,8 +27,14 @@ export default async function Dashboard() {
       `)
       .eq('profile_id', session.user.id)
 
+    // Improved error handling
     if (orgsError) {
-      console.error('Orgs error:', orgsError)
+      // Check if it's an empty object (which can happen sometimes)
+      if (Object.keys(orgsError).length === 0) {
+        console.log('No organizations found - empty error object')
+      } else {
+        console.error('Orgs error:', JSON.stringify(orgsError, null, 2))
+      }
       // Continue rendering but without orgs data
     }
 

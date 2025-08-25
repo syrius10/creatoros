@@ -1,5 +1,5 @@
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+// app/api/auth/callback/route.ts
+import { createClient } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
@@ -7,37 +7,18 @@ export async function GET(request: Request) {
   const code = requestUrl.searchParams.get('code')
 
   if (code) {
-    const cookieStore = await cookies()
+    const supabase = await createClient()
+    const { error } = await supabase.auth.exchangeCodeForSession(code)
     
-    // Remove the ! operators and add proper error handling
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-    if (!supabaseUrl || !supabaseKey) {
-      throw new Error('Supabase environment variables are not configured')
+    if (error) {
+      console.error('Auth callback error:', error)
+      return NextResponse.redirect(new URL('/signin?error=auth_callback', requestUrl.origin))
     }
-
-    // Use type assertion to bypass the deprecated signature check
-    const createClientFunc = createServerClient as any
-    
-    const supabase = createClientFunc(
-      supabaseUrl, // No ! needed
-      supabaseKey, // No ! needed
-      {
-        cookies: {
-          get: (name: string) => cookieStore.get(name)?.value,
-          set: (name: string, value: string, options: any) => {
-            cookieStore.set({ name, value, ...options })
-          },
-          remove: (name: string, options: any) => {
-            cookieStore.set({ name, value: '', ...options })
-          },
-        },
-      }
-    )
-    
-    await supabase.auth.exchangeCodeForSession(code)
   }
 
-  return NextResponse.redirect(requestUrl.origin)
+  // Redirect to dashboard after successful auth
+  return NextResponse.redirect(new URL('/dashboard', requestUrl.origin))
 }
+
+// Mark as dynamic since it handles auth
+export const dynamic = 'force-dynamic'

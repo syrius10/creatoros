@@ -1,4 +1,4 @@
-// lib/supabaseServer.ts
+// lib/supabaseServer.ts - TEMPORARY FIX
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
@@ -10,19 +10,15 @@ export async function createClient() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        getAll() {
-          return cookieStore.getAll()
+        get(name: string) {
+          return cookieStore.get(name)?.value
         },
-        setAll(cookiesToSet: any[]) {
-          try {
-            for (const cookie of cookiesToSet) {
-              cookieStore.set(cookie)
-            }
-          } catch (error) {
-            // The `setAll` method was called from a Server Component
-            // This can be ignored if you have middleware refreshing user sessions
-            console.error('Failed to set cookies:', error)
-          }
+        // ✅ TEMPORARILY DISABLE SET/REMOVE
+        set() {
+          // Do nothing - prevent cookie operations
+        },
+        remove() {
+          // Do nothing - prevent cookie operations
         },
       },
     }
