@@ -1,9 +1,10 @@
 import { createClient } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
 
+// Add proper type annotation for params
 export async function GET(
   request: Request,
-  { params }: { params: { courseId: string } }
+  { params }: { params: { courseId: string } } // ← THIS LINE MUST HAVE THE TYPE
 ) {
   try {
     const supabase = await createClient()
@@ -16,7 +17,7 @@ export async function GET(
     const { data: sections, error } = await supabase
       .from('sections')
       .select('*')
-      .eq('course_id', params.courseId)
+      .eq('course_id', params.courseId) // Use params.courseId
       .order('sort_order')
 
     if (error) {
@@ -26,7 +27,6 @@ export async function GET(
 
     return NextResponse.json(sections)
   } catch (error) {
-    // Handle the exception properly
     console.error('Unexpected error in sections GET:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
@@ -35,9 +35,10 @@ export async function GET(
   }
 }
 
+// Also fix the POST function
 export async function POST(
   request: Request,
-  { params }: { params: { courseId: string } }
+  { params }: { params: { courseId: string } } // ← AND THIS ONE TOO
 ) {
   try {
     const supabase = await createClient()
@@ -53,7 +54,7 @@ export async function POST(
     const { data: lastSection } = await supabase
       .from('sections')
       .select('sort_order')
-      .eq('course_id', params.courseId)
+      .eq('course_id', params.courseId) // Use params.courseId
       .order('sort_order', { ascending: false })
       .limit(1)
 
@@ -62,7 +63,7 @@ export async function POST(
     const { data: section, error: insertError } = await supabase
       .from('sections')
       .insert({
-        course_id: params.courseId,
+        course_id: params.courseId, // Use params.courseId
         title,
         description,
         sort_order: nextSortOrder,
@@ -77,7 +78,6 @@ export async function POST(
 
     return NextResponse.json(section)
   } catch (error) {
-    // Handle the exception properly
     console.error('Unexpected error in sections POST:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
