@@ -1,7 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove the experimental object entirely or update it:
-  serverExternalPackages: ['@supabase/supabase-js'],
+  // Use standalone output for optimal performance
+  output: 'standalone',
+  
+  // Ensure proper static asset handling
+  images: {
+    unoptimized: true
+  },
+  
+  // Transpile necessary packages
+  transpilePackages: ['@supabase/ssr', '@supabase/supabase-js'],
 }
 
-module.exports = nextConfig
+module.exports = nextConfigver
