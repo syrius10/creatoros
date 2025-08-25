@@ -1,12 +1,14 @@
 import { createClient } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-// Add proper type annotation for params
+// Use NextRequest instead of Request and proper params typing
 export async function GET(
-  request: Request,
-  { params }: { params: { courseId: string } } // ← THIS LINE MUST HAVE THE TYPE
+  request: NextRequest,
+  context: { params: Promise<{ courseId: string }> }
 ) {
   try {
+    const { courseId } = await context.params
     const supabase = await createClient()
     const { data: { user }, error: userError } = await supabase.auth.getUser()
 
@@ -17,7 +19,7 @@ export async function GET(
     const { data: sections, error } = await supabase
       .from('sections')
       .select('*')
-      .eq('course_id', params.courseId) // Use params.courseId
+      .eq('course_id', courseId)
       .order('sort_order')
 
     if (error) {
@@ -35,12 +37,12 @@ export async function GET(
   }
 }
 
-// Also fix the POST function
 export async function POST(
-  request: Request,
-  { params }: { params: { courseId: string } } // ← AND THIS ONE TOO
+  request: NextRequest,
+  context: { params: Promise<{ courseId: string }> }
 ) {
   try {
+    const { courseId } = await context.params
     const supabase = await createClient()
     const { data: { user }, error: userError } = await supabase.auth.getUser()
 
@@ -54,7 +56,7 @@ export async function POST(
     const { data: lastSection } = await supabase
       .from('sections')
       .select('sort_order')
-      .eq('course_id', params.courseId) // Use params.courseId
+      .eq('course_id', courseId)
       .order('sort_order', { ascending: false })
       .limit(1)
 
@@ -63,7 +65,7 @@ export async function POST(
     const { data: section, error: insertError } = await supabase
       .from('sections')
       .insert({
-        course_id: params.courseId, // Use params.courseId
+        course_id: courseId,
         title,
         description,
         sort_order: nextSortOrder,

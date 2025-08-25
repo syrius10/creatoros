@@ -1,11 +1,13 @@
 import { createClient } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
 export async function GET(
-  request: Request,
-  { params }: { params: { sectionId: string } }
+  request: NextRequest,
+  context: { params: Promise<{ sectionId: string }> }
 ) {
   try {
+    const { sectionId } = await context.params
     const supabase = await createClient()
     const { data: { user }, error: userError } = await supabase.auth.getUser()
 
@@ -16,7 +18,7 @@ export async function GET(
     const { data: lessons, error } = await supabase
       .from('lessons')
       .select('*')
-      .eq('section_id', params.sectionId)
+      .eq('section_id', sectionId)
       .order('sort_order')
 
     if (error) {
@@ -35,10 +37,11 @@ export async function GET(
 }
 
 export async function POST(
-  request: Request,
-  { params }: { params: { sectionId: string } }
+  request: NextRequest,
+  context: { params: Promise<{ sectionId: string }> }
 ) {
   try {
+    const { sectionId } = await context.params
     const supabase = await createClient()
     const { data: { user }, error: userError } = await supabase.auth.getUser()
 
@@ -52,7 +55,7 @@ export async function POST(
     const { data: lastLesson } = await supabase
       .from('lessons')
       .select('sort_order')
-      .eq('section_id', params.sectionId)
+      .eq('section_id', sectionId)
       .order('sort_order', { ascending: false })
       .limit(1)
 
@@ -61,7 +64,7 @@ export async function POST(
     const { data: lesson, error: insertError } = await supabase
       .from('lessons')
       .insert({
-        section_id: params.sectionId,
+        section_id: sectionId,
         title,
         description,
         is_free: is_free || false,
