@@ -1,11 +1,14 @@
+// app/api/lessons/[lessonId]/upload/route.ts
 import { createClient } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
 export async function POST(
-  request: Request,
-  { params }: { params: { lessonId: string } }
+  request: NextRequest,
+  context: { params: Promise<{ lessonId: string }> }
 ) {
   try {
+    const { lessonId } = await context.params
     const supabase = await createClient()
     const { data: { user }, error: userError } = await supabase.auth.getUser()
 
@@ -26,10 +29,10 @@ export async function POST(
 
     // Generate a unique filename
     const fileExt = file.name.split('.').pop()
-    const fileName = `${params.lessonId}-${Math.random().toString(36).substring(2)}.${fileExt}`
+    const fileName = `${lessonId}-${Math.random().toString(36).substring(2)}.${fileExt}`
     const filePath = `${fileName}`
 
-    // Upload the file to Supabase Storage - remove unused uploadData variable
+    // Upload the file to Supabase Storage
     const { error: uploadError } = await supabase
       .storage
       .from(bucketName)
@@ -51,7 +54,7 @@ export async function POST(
     const { error: updateError } = await supabase
       .from('lessons')
       .update({ [updateField]: publicUrl })
-      .eq('id', params.lessonId)
+      .eq('id', lessonId)
 
     if (updateError) {
       console.error('Lesson update error:', updateError)
