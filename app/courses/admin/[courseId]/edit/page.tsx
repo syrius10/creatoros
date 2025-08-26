@@ -5,10 +5,10 @@ import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import AIGeneratorButton from '@/components/AIGeneratorButton'
 
-export default function CourseEditPage() {
+export default function Page() {
   const [outline, setOutline] = useState('')
   const params = useParams()
-  const courseId = params?.courseId as string || ''
+  const courseId = params.courseId as string
 
   const handleOutlineGenerated = (content: string) => {
     setOutline(content)
