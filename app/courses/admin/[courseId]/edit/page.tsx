@@ -5,6 +5,9 @@ import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import AIGeneratorButton from '@/components/AIGeneratorButton'
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 export default function CourseEditPage() {
   const [outline, setOutline] = useState('')
   const params = useParams()
