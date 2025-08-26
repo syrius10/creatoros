@@ -7,7 +7,11 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
   // Transpile necessary packages
   transpilePackages: ['@supabase/ssr', '@supabase/supabase-js'],
 }

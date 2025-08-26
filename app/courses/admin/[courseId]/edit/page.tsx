@@ -5,8 +5,7 @@ import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import AIGeneratorButton from '@/components/AIGeneratorButton'
 
-// @ts-ignore - Force ignore the type checking
-const CourseEditPage = () => {
+export default function CourseEditPage() {
   const [outline, setOutline] = useState('')
   const params = useParams()
   const courseId = params.courseId as string
@@ -34,6 +33,3 @@ const CourseEditPage = () => {
     </div>
   )
 }
-
-// @ts-ignore - Force dynamic export
-export default CourseEditPage
