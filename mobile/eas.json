@@ -1,0 +1,36 @@
+{
+  "cli": {
+    "version": ">= 3.6.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "your_supabase_url",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "your_supabase_anon_key",
+        "EXPO_PUBLIC_APP_URL": "your_app_url"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "your_supabase_url",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "your_supabase_anon_key",
+        "EXPO_PUBLIC_APP_URL": "your_app_url"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "your_supabase_url",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "your_supabase_anon_key",
+        "EXPO_PUBLIC_APP_URL": "your_app_url"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

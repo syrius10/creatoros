@@ -1,16 +1,23 @@
 // app/checkout/success/page.tsx
 import { createClient } from '@/lib/supabaseServer'
 import { redirect } from 'next/navigation'
+import MobileSuccessHandler from './MobileSuccessHandler'
 
 // Define the props interface with Promise searchParams
 interface SuccessPageProps {
-  readonly searchParams: Promise<{ session_id: string }>
+  readonly searchParams: Promise<{ 
+    session_id: string;
+    course_id?: string;
+    source?: string;
+  }>
 }
 
-export default async function SuccessPage(props: SuccessPageProps) {
+export default async function SuccessPage(props: Readonly<SuccessPageProps>) {
   // Await the searchParams promise
   const searchParams = await props.searchParams
   const session_id = searchParams.session_id
+  const course_id = searchParams.course_id
+  const source = searchParams.source
   
   const supabase = await createClient()
   const { data: { session } } = await supabase.auth.getSession()
@@ -25,6 +32,17 @@ export default async function SuccessPage(props: SuccessPageProps) {
     .select('*')
     .eq('stripe_session_id', session_id)
     .single()
+
+  // Handle mobile deep linking - pass to client component
+  if (source === 'mobile') {
+    return (
+      <MobileSuccessHandler 
+        session_id={session_id} 
+        course_id={course_id} 
+        order={order} 
+      />
+    );
+  }
 
   if (!order || order.status !== 'paid') {
     // You might want to poll or wait for webhook to update

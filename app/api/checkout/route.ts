@@ -1,4 +1,3 @@
-// app/api/checkout/route.ts
 import { createClient } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
@@ -24,7 +23,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { priceId, orgId } = await request.json()
+    const { priceId, orgId, courseId, source } = await request.json()
 
     if (!priceId || !orgId) {
       return NextResponse.json({ error: 'Missing priceId or orgId' }, { status: 400 })
@@ -41,6 +40,22 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Price not found' }, { status: 404 })
     }
 
+    // Build success and cancel URLs with mobile support
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+    const successParams = new URLSearchParams({
+      session_id: '{CHECKOUT_SESSION_ID}',
+      ...(courseId && { course_id: courseId }),
+      source: source || 'web'
+    });
+    
+    const cancelParams = new URLSearchParams({
+      ...(courseId && { course_id: courseId }),
+      source: source || 'web'
+    });
+
+    const successUrl = `${baseUrl}/checkout/success?${successParams.toString()}`;
+    const cancelUrl = `${baseUrl}/checkout/cancel?${cancelParams.toString()}`;
+
     // Create a checkout session
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -50,12 +65,14 @@ export async function POST(request: Request) {
         },
       ],
       mode: price.type === 'recurring' ? 'subscription' : 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/cancel`,
+      success_url: successUrl,
+      cancel_url: cancelUrl,
       customer_email: authSession.user.email,
       metadata: {
         orgId,
         userId: authSession.user.id,
+        ...(courseId && { courseId }),
+        source: source || 'web'
       },
     })
 
@@ -70,6 +87,8 @@ export async function POST(request: Request) {
         currency: price.currency,
         customer_email: authSession.user.email,
         status: 'pending',
+        ...(courseId && { course_id: courseId }),
+        source: source || 'web'
       })
 
     if (orderError) {
