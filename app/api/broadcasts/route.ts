@@ -5,10 +5,8 @@ import { z } from 'zod';
 const broadcastSchema = z.object({
   subject: z.string().min(1),
   content: z.string().min(1),
-  // @ts-ignore
-  list_ids: z.array(z.uuid()),
-  // @ts-ignore
-  scheduled_for: z.datetime().optional()
+  list_ids: z.array(z.uuid({ version: 'v4' })),
+  scheduled_for: z.string().optional()
 });
 
 export async function POST(request: NextRequest) {
@@ -22,6 +20,14 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { subject, content, list_ids, scheduled_for } = broadcastSchema.parse(body);
+    
+    // Validate scheduled_for format if provided
+    if (scheduled_for) {
+      const date = new Date(scheduled_for);
+      if (isNaN(date.getTime())) {
+        return NextResponse.json({ error: 'Invalid date format' }, { status: 400 });
+      }
+    }
     
     // First, verify that all list_ids belong to the user's organization
     const { data: validLists, error: listError } = await supabase
@@ -53,17 +59,19 @@ export async function POST(request: NextRequest) {
 
     if (broadcastError) throw broadcastError;
 
-    // Create broadcast-list associations
-    const broadcastLists = list_ids.map(list_id => ({
-      broadcast_id: broadcast.id,
-      list_id
-    }));
+    // Create broadcast-list associations if lists were provided
+    if (list_ids && list_ids.length > 0) {
+      const broadcastLists = list_ids.map(list_id => ({
+        broadcast_id: broadcast.id,
+        list_id
+      }));
 
-    const { error: broadcastListError } = await supabase
-      .from('broadcast_lists')
-      .insert(broadcastLists);
+      const { error: broadcastListError } = await supabase
+        .from('broadcast_lists')
+        .insert(broadcastLists);
 
-    if (broadcastListError) throw broadcastListError;
+      if (broadcastListError) throw broadcastListError;
+    }
 
     return NextResponse.json({ broadcast });
   } catch (error) {
