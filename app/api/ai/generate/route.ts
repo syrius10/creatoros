@@ -1,8 +1,9 @@
-import { NextResponse } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 import { AIOrchestrator, AIGenerateRequest } from '@/lib/ai/orchestrator'
 import { createClient } from '@/lib/supabaseServer'
+import { rateLimit } from '@/lib/rateLimit'
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   const supabase = await createClient()
   
   const {
@@ -12,6 +13,15 @@ export async function POST(request: Request) {
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
+
+  // Apply rate limiting (10 requests per minute per user)
+  const rateLimitResponse = await rateLimit(
+    request,
+    `ai:${session.user.id}`, 
+    10, 
+    60000
+  )
+  if (rateLimitResponse) return rateLimitResponse
 
   const { prompt, type, context }: AIGenerateRequest = await request.json()
 

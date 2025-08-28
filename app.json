@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "ae0807b8-70d5-4a4f-8044-4d50253ed4df"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.syrius10.creatoros",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    }
+  }
+}

@@ -109,3 +109,4 @@ Thumbs.db
 # Removed: Serverless, FuseBox, DynamoDB, Firebase, TernJS (not in our stack)
 # Removed: .vscode-test (we don't test VSCode extensions)
 # Removed: excessive Yarn v3 rules (we use standard Yarn/npm)
+.vercel
