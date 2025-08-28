@@ -13,7 +13,12 @@
     "db:seed": "curl -X POST http://localhost:3000/api/dev/seed",
     "stripe:sync": "curl -X POST http://localhost:3000/api/stripe/sync",
     "deploy:web": "vercel --prod",
-    "setup:folders": "bash scripts/setup-folders.sh"
+    "setup:folders": "bash scripts/setup-folders.sh",
+    "db:migrate": "supabase db push",
+    "db:studio": "supabase studio",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed"
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",
@@ -24,7 +29,8 @@
     "next": "^15.5.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "stripe": "^18.4.0"
+    "stripe": "^18.4.0",
+    "zod": "^4.1.4"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
