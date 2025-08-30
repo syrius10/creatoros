@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { createClient } from '@/lib/client';
 import { useOrg } from '@/lib/client/contexts/OrgContext';
 
-// Disable prerendering for this page
+// This ensures the page is not statically generated
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default function CommunityPage() {
   const [forums, setForums] = useState<any[]>([]);
@@ -51,7 +52,7 @@ export default function CommunityPage() {
 
   // Don't render anything until component has mounted on client side
   if (!hasMounted) {
-    return <div className="flex justify-center p-8">Loading...</div>;
+    return null; // Return null instead of a loading message during SSR
   }
 
   if (orgLoading) {
