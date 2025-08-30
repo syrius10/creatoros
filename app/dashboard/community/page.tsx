@@ -5,25 +5,21 @@ import Link from 'next/link';
 import { createClient } from '@/lib/client';
 import { useOrg } from '@/lib/client/contexts/OrgContext';
 
-// This ensures the page is not statically generated
+// These exports completely disable prerendering
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 
-export default function CommunityPage() {
+// This component will only render on the client side
+function CommunityContent() {
   const [forums, setForums] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [hasMounted, setHasMounted] = useState(false);
   const supabase = createClient();
   const { currentOrg, loading: orgLoading } = useOrg();
 
-  // Set hasMounted to true after component mounts (client-side only)
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
   useEffect(() => {
     async function loadForums() {
-      if (!currentOrg || !hasMounted) return;
+      if (!currentOrg) return;
       
       try {
         const { data: forumsData, error } = await supabase
@@ -45,15 +41,10 @@ export default function CommunityPage() {
       }
     }
 
-    if (currentOrg && hasMounted) {
+    if (currentOrg) {
       loadForums();
     }
-  }, [currentOrg, supabase, hasMounted]);
-
-  // Don't render anything until component has mounted on client side
-  if (!hasMounted) {
-    return null; // Return null instead of a loading message during SSR
-  }
+  }, [currentOrg, supabase]);
 
   if (orgLoading) {
     return <div className="flex justify-center p-8">Loading organizations...</div>;
@@ -128,4 +119,20 @@ export default function CommunityPage() {
       </div>
     </div>
   );
+}
+
+// This is the main page component that ensures no SSR
+export default function CommunityPage() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Don't render anything during SSR
+  if (!isClient) {
+    return null;
+  }
+
+  return <CommunityContent />;
 }
