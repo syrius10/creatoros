@@ -1,20 +1,24 @@
-// Use an import alias to avoid the naming conflict
-import { default as nextDynamic } from 'next/dynamic';
+'use client';
 
-// Disable SSR completely for this page
-const CommunityClient = nextDynamic(
-  () => import('./CommunityClient'),
-  { 
-    ssr: false,
-    loading: () => <div className="flex justify-center p-8">Loading community...</div>
-  }
-);
+import { useEffect, useState } from 'react';
+import CommunityClient from './CommunityClient';
 
-// Next.js page configuration
+// These exports ensure no static generation
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
 export default function CommunityPage() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Don't render anything during SSR
+  if (!isClient) {
+    return <div className="flex justify-center p-8">Loading community...</div>;
+  }
+
   return <CommunityClient />;
 }
