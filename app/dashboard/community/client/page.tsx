@@ -78,7 +78,7 @@ export default function CommunityClientPage() {
               <div>
                 <h2 className="text-xl font-semibold mb-2">
                   <Link 
-                    href={`/community/${forum.id}`}
+                    href={`/community/client/${forum.id}`}
                     className="hover:text-blue-600 transition-colors"
                   >
                     {forum.name}
@@ -98,7 +98,7 @@ export default function CommunityClientPage() {
               </div>
               
               <Link
-                href={`/community/${forum.id}`}
+                href={`/community/client/${forum.id}`}
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 View Forum
