@@ -1,7 +1,7 @@
 // This is a simple redirect page that doesn't use any client-side hooks
 import { redirect } from 'next/navigation'
 
-export default function CommunityPage() {
+export default function CatchAllCommunityPage() {
   redirect('/community/client')
 }
 
