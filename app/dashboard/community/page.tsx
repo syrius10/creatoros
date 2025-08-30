@@ -2,22 +2,30 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabaseServer';
+import { createClient } from '@/lib/client';
 import { useOrg } from '@/lib/client/contexts/OrgContext';
+
+// Disable prerendering for this page
+export const dynamic = 'force-dynamic';
 
 export default function CommunityPage() {
   const [forums, setForums] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [supabase] = useState(() => createClient());
+  const [hasMounted, setHasMounted] = useState(false);
+  const supabase = createClient();
   const { currentOrg, loading: orgLoading } = useOrg();
+
+  // Set hasMounted to true after component mounts (client-side only)
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   useEffect(() => {
     async function loadForums() {
-      if (!currentOrg) return;
+      if (!currentOrg || !hasMounted) return;
       
       try {
-        const client = await supabase;
-        const { data: forumsData, error } = await client
+        const { data: forumsData, error } = await supabase
           .from('forums')
           .select('*, orgs(name)')
           .eq('org_id', currentOrg.id)
@@ -36,10 +44,15 @@ export default function CommunityPage() {
       }
     }
 
-    if (currentOrg) {
+    if (currentOrg && hasMounted) {
       loadForums();
     }
-  }, [currentOrg, supabase]);
+  }, [currentOrg, supabase, hasMounted]);
+
+  // Don't render anything until component has mounted on client side
+  if (!hasMounted) {
+    return <div className="flex justify-center p-8">Loading...</div>;
+  }
 
   if (orgLoading) {
     return <div className="flex justify-center p-8">Loading organizations...</div>;

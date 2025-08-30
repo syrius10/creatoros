@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
-import { createClient } from '@/lib/supabaseServer';
+import { createClient } from '@/lib/client';
 
 // Define proper TypeScript interfaces
 interface Organization {
@@ -10,7 +10,6 @@ interface Organization {
   slug: string;
   created_at: string;
   updated_at: string;
-  // Add other properties as needed
 }
 
 interface OrgContextType {
@@ -30,19 +29,18 @@ export function OrgProvider({ children }: OrgProviderProps) {
   const [currentOrg, setCurrentOrg] = useState<Organization | null>(null);
   const [userOrgs, setUserOrgs] = useState<Organization[]>([]);
   const [loading, setLoading] = useState(true);
-  const [supabase] = useState(() => createClient());
+  const supabase = createClient(); // Use client-side client directly
 
   useEffect(() => {
     async function loadUserOrgs() {
       try {
-        const client = await supabase;
-        const { data: { user } } = await client.auth.getUser();
+        const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
           setLoading(false);
           return;
         }
 
-        const { data: memberships, error } = await client
+        const { data: memberships, error } = await supabase
           .from('org_members')
           .select('org_id, orgs(*)')
           .eq('profile_id', user.id);
@@ -53,9 +51,7 @@ export function OrgProvider({ children }: OrgProviderProps) {
         }
 
         if (memberships) {
-          // The actual response structure is different from OrgMember interface
           const orgs = memberships.map((m: any) => m.orgs);
-          // Filter out any null values and ensure they are Organization objects
           const validOrgs = orgs.filter((org: unknown): org is Organization => 
             org !== null && typeof org === 'object' && 'id' in org
           );
@@ -72,7 +68,7 @@ export function OrgProvider({ children }: OrgProviderProps) {
     }
 
     loadUserOrgs();
-  }, []);
+  }, [supabase, currentOrg]);
 
   // Memoize the context value to prevent unnecessary re-renders
   const contextValue = useMemo(() => ({
