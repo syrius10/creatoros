@@ -5,7 +5,12 @@ import Link from 'next/link';
 import { createClient } from '@/lib/client';
 import { useOrg } from '@/lib/client/contexts/OrgContext';
 
-export default function CommunityClient() {
+// These exports ensure no static generation
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
+export default function CommunityPage() {
   const [forums, setForums] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const supabase = createClient();
@@ -47,7 +52,7 @@ export default function CommunityClient() {
   if (!currentOrg) {
     return (
       <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-8">Community Forums</h1>
+        <h1 className="text-3xl font-bold mb-8">Community</h1>
         <div className="text-center py-12">
           <h2 className="text-xl text-gray-500">No organization selected</h2>
           <p className="text-gray-400 mt-2">
@@ -64,7 +69,7 @@ export default function CommunityClient() {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-8">Community Forums</h1>
+      <h1 className="text-3xl font-bold mb-8">Community</h1>
       
       <div className="grid gap-6">
         {forums.map(forum => (
@@ -73,7 +78,7 @@ export default function CommunityClient() {
               <div>
                 <h2 className="text-xl font-semibold mb-2">
                   <Link 
-                    href={`/community/${forum.id}`}
+                    href={`/community-client/${forum.id}`}
                     className="hover:text-blue-600 transition-colors"
                   >
                     {forum.name}
@@ -93,7 +98,7 @@ export default function CommunityClient() {
               </div>
               
               <Link
-                href={`/community/${forum.id}`}
+                href={`/community-client/${forum.id}`}
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 View Forum
