@@ -26,7 +26,6 @@ test.describe('Affiliate Program Features', () => {
     await page.route('**/api/affiliates/track', async (route) => {
       // Create a response that sets the cookie
       const response = await route.fetch();
-      const json = await response.json();
       
       // Fulfill with a response that sets the cookie
       await route.fulfill({
