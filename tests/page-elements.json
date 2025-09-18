@@ -1,0 +1,302 @@
+[
+  {
+    "tagName": "html",
+    "id": "none",
+    "className": "none",
+    "text": "CreatorOS@font-face{font-family:'__nextjs-Geist';font-style:normal;font-weight:400 600;font-display:"
+  },
+  {
+    "tagName": "head",
+    "id": "none",
+    "className": "none",
+    "text": "CreatorOS@font-face{font-family:'__nextjs-Geist';font-style:normal;font-weight:400 600;font-display:"
+  },
+  {
+    "tagName": "meta",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "meta",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "link",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "link",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "meta",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "title",
+    "id": "none",
+    "className": "none",
+    "text": "CreatorOS"
+  },
+  {
+    "tagName": "meta",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "link",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "style",
+    "id": "none",
+    "className": "none",
+    "text": "@font-face{font-family:'__nextjs-Geist';font-style:normal;font-weight:400 600;font-display:swap;src:"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "body",
+    "id": "none",
+    "className": "__className_f367f3",
+    "text": "Sign in to CreatorOSSend magic link(self.__next_f=self.__next_f||[]).push([0])self.__next_f.push([1,"
+  },
+  {
+    "tagName": "div",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "div",
+    "id": "none",
+    "className": "min-h-screen flex items-center justify-center bg-g",
+    "text": "Sign in to CreatorOSSend magic link"
+  },
+  {
+    "tagName": "div",
+    "id": "none",
+    "className": "max-w-md w-full space-y-8",
+    "text": "Sign in to CreatorOSSend magic link"
+  },
+  {
+    "tagName": "div",
+    "id": "none",
+    "className": "none",
+    "text": "Sign in to CreatorOS"
+  },
+  {
+    "tagName": "h2",
+    "id": "none",
+    "className": "mt-6 text-center text-3xl font-extrabold text-gray",
+    "text": "Sign in to CreatorOS"
+  },
+  {
+    "tagName": "form",
+    "id": "none",
+    "className": "mt-8 space-y-6",
+    "text": "Send magic link"
+  },
+  {
+    "tagName": "div",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "input",
+    "id": "none",
+    "className": "appearance-none rounded-md relative block w-full p",
+    "text": "none"
+  },
+  {
+    "tagName": "div",
+    "id": "none",
+    "className": "none",
+    "text": "Send magic link"
+  },
+  {
+    "tagName": "button",
+    "id": "none",
+    "className": "group relative w-full flex justify-center py-2 px-",
+    "text": "Send magic link"
+  },
+  {
+    "tagName": "script",
+    "id": "_R_",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "(self.__next_f=self.__next_f||[]).push([0])"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "self.__next_f.push([1,\"6:I[\\\"(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/ap"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "self.__next_f.push([1,\"tx.componentMod.preloadFont(href,type,ctx.renderOpts.crossOrigin,ctx.nonce)},"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "self.__next_f.push([1,\"\\\",0,0,0,0,true],[\\\"Function.all\\\",\\\"\\\",0,0,0,0,true]]\\n2b:[[\\\"Function.all\\\""
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "self.__next_f.push([1,\"1b:[[\\\"$\\\",\\\"title\\\",null,{\\\"children\\\":\\\"404: This page could not be found.\\"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "self.__next_f.push([1,\"a:[\\\"$\\\",\\\"html\\\",null,{\\\"lang\\\":\\\"en\\\",\\\"children\\\":[\\\"$\\\",\\\"body\\\",null,{\\\""
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "self.__next_f.push([1,\"33:D\\\"$34\\\"\\n36:D\\\"$37\\\"\\n36:[\\\"$\\\",\\\"$L39\\\",null,{\\\"promise\\\":\\\"$@3a\\\"},\\\"$3"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "self.__next_f.push([1,\"0:{\\\"P\\\":\\\"$1\\\",\\\"b\\\":\\\"development\\\",\\\"p\\\":\\\"\\\",\\\"c\\\":[\\\"\\\",\\\"signin\\\"],\\\"i\\"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "self.__next_f.push([1,\"42:[[\\\"$\\\",\\\"meta\\\",\\\"0\\\",{\\\"charSet\\\":\\\"utf-8\\\"},\\\"$34\\\",\\\"$53\\\",0],[\\\"$\\\",\\"
+  },
+  {
+    "tagName": "script",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "nextjs-portal",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "next-route-announcer",
+    "id": "none",
+    "className": "none",
+    "text": "none"
+  },
+  {
+    "tagName": "style",
+    "id": "none",
+    "className": "none",
+    "text": ":host {   all: initial;    /* the direction property is not reset by 'all' */   direction: ltr; }  /"
+  },
+  {
+    "tagName": "style",
+    "id": "none",
+    "className": "none",
+    "text": ":host {   /*     * Although the style applied to the shadow host is isolated,    * the element that "
+  },
+  {
+    "tagName": "style",
+    "id": "none",
+    "className": "none",
+    "text": ":host(.dark) {   --color-font: white;   --color-backdrop: rgba(0, 0, 0, 0.8);   --color-border-shado"
+  },
+  {
+    "tagName": "style",
+    "id": "none",
+    "className": "none",
+    "text": ":host {   /*     * CAUTION: THIS IS A WORKAROUND!    * For now, we use @babel/code-frame to parse th"
+  },
+  {
+    "tagName": "style",
+    "id": "none",
+    "className": "none",
+    "text": "/* devtool global css variables */ :host {   /* variables */   --top-z-index: 2147483647; }  /* glob"
+  },
+  {
+    "tagName": "style",
+    "id": "none",
+    "className": "none",
+    "text": ".nextjs-toast {   position: fixed;   z-index: var(--top-z-index);   max-width: 420px;   box-shadow: "
+  },
+  {
+    "tagName": "style",
+    "id": "none",
+    "className": "none",
+    "text": "[data-nextjs-toast] {   &[data-hidden='true'] {     display: none;   } }  .dev-tools-indicator-menu "
+  },
+  {
+    "tagName": "style",
+    "id": "none",
+    "className": "none",
+    "text": ".resize-container {   position: absolute;   /* todo: better z index */   z-index: 10;   /* todo: is "
+  },
+  {
+    "tagName": "style",
+    "id": "none",
+    "className": "none",
+    "text": "/* Panel container base styles with dynamic positioning and sizing */ .dynamic-panel-container {   p"
+  }
+]

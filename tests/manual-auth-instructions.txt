@@ -1,0 +1,11 @@
+Authentication Setup Instructions:
+        
+1. Open your browser and go to: http://localhost:3000/signin
+2. Manually log in using your preferred method
+3. After logging in, the browser will save your authentication state
+4. Run the tests again
+
+If you continue to have issues, check the generated files for debugging:
+- signin-page-content.html: The HTML content of the signin page
+- signin-page.png: A screenshot of the signin page
+- page-elements.json: Information about all elements on the page
