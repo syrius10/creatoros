@@ -1,8 +1,6 @@
 Authentication Setup Instructions:
-      
-1. Open your browser and go to: http://localhost:3000/signin
-2. Manually log in using your preferred method
-3. After logging in, the browser will save your authentication state
-4. Run the tests again
 
-The browser will remain open for 2 minutes for manual login...
+1. Open: http://localhost:3000/signin
+2. Manually log in with the test account or your dev credentials
+3. Wait a few seconds for the app to set tokens/cookies
+4. When finished, the storage state will be saved to tests/auth.json if you keep the browser open.
