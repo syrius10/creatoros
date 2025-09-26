@@ -21,6 +21,8 @@
     "test:e2e:headed": "playwright test --headed"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.2.0",
+    "@react-native-community/netinfo": "^11.4.1",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.56.0",
     "@vercel/analytics": "^1.5.0",
@@ -31,6 +33,10 @@
     "next": "^15.5.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-native-gesture-handler": "^2.28.0",
+    "react-native-push-notification": "^8.1.1",
+    "react-native-reanimated": "^4.1.2",
+    "react-native-video": "^6.16.1",
     "stripe": "^18.4.0",
     "zod": "^4.1.4"
   },
@@ -41,6 +47,9 @@
     "@types/node": "^24.3.0",
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.7",
+    "@types/react-native": "^0.72.8",
+    "@types/react-native-push-notification": "^8.1.4",
+    "@types/react-native-video": "^5.0.20",
     "@types/stripe": "^8.0.416",
     "autoprefixer": "^10.4.21",
     "dotenv": "^17.2.1",
