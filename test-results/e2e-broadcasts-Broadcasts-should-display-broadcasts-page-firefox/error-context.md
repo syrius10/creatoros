@@ -1,0 +1,92 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [active]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - navigation [ref=e7]:
+            - button "previous" [disabled] [ref=e8]:
+              - img "previous" [ref=e9]
+            - generic [ref=e11]:
+              - generic [ref=e12]: 1/
+              - generic [ref=e13]: "1"
+            - button "next" [disabled] [ref=e14]:
+              - img "next" [ref=e15]
+          - img
+        - generic [ref=e17]:
+          - link "Next.js 15.5.2 (stale) Webpack" [ref=e18] [cursor=pointer]:
+            - /url: https://nextjs.org/docs/messages/version-staleness
+            - img [ref=e19] [cursor=pointer]
+            - generic "There is a newer version (15.5.4) available, upgrade recommended!" [ref=e21] [cursor=pointer]: Next.js 15.5.2 (stale)
+            - generic [ref=e22] [cursor=pointer]: Webpack
+          - img
+      - dialog "Runtime TypeError" [ref=e24]:
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]:
+              - generic [ref=e31]: Runtime TypeError
+              - generic [ref=e32]:
+                - button "Copy Error Info" [ref=e33] [cursor=pointer]:
+                  - img [ref=e34] [cursor=pointer]
+                - button "No related documentation found" [disabled] [ref=e36]:
+                  - img [ref=e37]
+                - link "Learn more about enabling Node.js inspector for server code with Chrome DevTools" [ref=e39] [cursor=pointer]:
+                  - /url: https://nextjs.org/docs/app/building-your-application/configuring/debugging#server-side-code
+                  - img [ref=e40] [cursor=pointer]
+            - paragraph [ref=e49]: can't access property "length", broadcasts is undefined
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - paragraph [ref=e53]:
+                - text: Call Stack
+                - generic [ref=e54]: "52"
+              - button "Show 42 ignore-listed frame(s)" [ref=e55] [cursor=pointer]:
+                - text: Show 42 ignore-listed frame(s)
+                - img [ref=e56] [cursor=pointer]
+            - generic [ref=e58]:
+              - generic [ref=e59]: BroadcastsPage
+              - generic [ref=e60]: ./app/dashboard/broadcasts/page.tsx
+            - generic [ref=e61]:
+              - generic [ref=e62]: (app-pages-browser)/./node_modules/next/dist/compiled/scheduler/cjs/scheduler.development.js
+              - generic [ref=e63]: .next/static/chunks/main-app.js (1323:1)
+            - generic [ref=e64]:
+              - generic [ref=e65]: (app-pages-browser)/./node_modules/next/dist/compiled/scheduler/index.js
+              - generic [ref=e66]: .next/static/chunks/main-app.js (1334:1)
+            - generic [ref=e67]:
+              - generic [ref=e68]: (app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js
+              - generic [ref=e69]: .next/static/chunks/main-app.js (1181:1)
+            - generic [ref=e70]:
+              - generic [ref=e71]: (app-pages-browser)/./node_modules/next/dist/compiled/react-dom/client.js
+              - generic [ref=e72]: .next/static/chunks/main-app.js (1203:1)
+            - generic [ref=e73]:
+              - generic [ref=e74]: (app-pages-browser)/./node_modules/next/dist/client/app-index.js
+              - generic [ref=e75]: .next/static/chunks/main-app.js (160:1)
+            - generic [ref=e76]:
+              - generic [ref=e77]: (app-pages-browser)/./node_modules/next/dist/client/app-next-dev.js
+              - generic [ref=e78]: .next/static/chunks/main-app.js (182:1)
+            - generic [ref=e79]:
+              - generic [ref=e80]: __webpack_exec__
+              - generic [ref=e81]: .next/static/chunks/main-app.js (1889:67)
+            - generic [ref=e82]:
+              - generic [ref=e83]: <unknown>
+              - generic [ref=e84]: .next/static/chunks/main-app.js (1890:154)
+            - generic [ref=e85]:
+              - generic [ref=e86]: <unknown>
+              - generic [ref=e87]: .next/static/chunks/main-app.js (9:61)
+        - generic [ref=e88]:
+          - generic [ref=e89]: "1"
+          - generic [ref=e90]: "2"
+    - generic [ref=e95] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e96] [cursor=pointer]:
+        - img [ref=e97] [cursor=pointer]
+      - generic [ref=e101] [cursor=pointer]:
+        - button "Open issues overlay" [ref=e102] [cursor=pointer]:
+          - generic [ref=e103] [cursor=pointer]:
+            - generic [ref=e104] [cursor=pointer]: "0"
+            - generic [ref=e105] [cursor=pointer]: "1"
+          - generic [ref=e106] [cursor=pointer]: Issue
+        - button "Collapse issues badge" [ref=e107] [cursor=pointer]:
+          - img [ref=e108] [cursor=pointer]
+  - 'heading "Application error: a client-side exception has occurred while loading localhost (see the browser console for more information)." [level=2] [ref=e112]'
+```

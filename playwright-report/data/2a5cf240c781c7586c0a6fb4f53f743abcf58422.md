@@ -1,0 +1,83 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [active]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - navigation [ref=e7]:
+            - button "previous" [disabled] [ref=e8]:
+              - img "previous" [ref=e9]
+            - generic [ref=e11]:
+              - generic [ref=e12]: 1/
+              - generic [ref=e13]: "1"
+            - button "next" [disabled] [ref=e14]:
+              - img "next" [ref=e15]
+          - img
+        - generic [ref=e17]:
+          - link "Next.js 15.5.2 (stale) Webpack" [ref=e18] [cursor=pointer]:
+            - /url: https://nextjs.org/docs/messages/version-staleness
+            - img [ref=e19] [cursor=pointer]
+            - generic "There is a newer version (15.5.4) available, upgrade recommended!" [ref=e21] [cursor=pointer]: Next.js 15.5.2 (stale)
+            - generic [ref=e22] [cursor=pointer]: Webpack
+          - img
+      - dialog "Runtime TypeError" [ref=e24]:
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]:
+              - generic [ref=e31]: Runtime TypeError
+              - generic [ref=e32]:
+                - button "Copy Error Info" [ref=e33] [cursor=pointer]:
+                  - img [ref=e34] [cursor=pointer]
+                - button "No related documentation found" [disabled] [ref=e36]:
+                  - img [ref=e37]
+                - link "Learn more about enabling Node.js inspector for server code with Chrome DevTools" [ref=e39] [cursor=pointer]:
+                  - /url: https://nextjs.org/docs/app/building-your-application/configuring/debugging#server-side-code
+                  - img [ref=e40] [cursor=pointer]
+            - paragraph [ref=e49]: Cannot read properties of undefined (reading 'length')
+          - generic [ref=e50]:
+            - generic [ref=e51]:
+              - paragraph [ref=e53]:
+                - img [ref=e55]
+                - generic [ref=e58]: app/dashboard/broadcasts/page.tsx (77:21) @ BroadcastsPage
+                - button "Open in editor" [ref=e59] [cursor=pointer]:
+                  - img [ref=e61] [cursor=pointer]
+              - generic [ref=e64]:
+                - generic [ref=e66]: 75 |
+                - generic [ref=e68]: 76 | <div className="grid gap-4">
+                - generic [ref=e70]: "> 77 | {broadcasts.length === 0 ? ("
+                - generic [ref=e72]: "| ^"
+                - generic [ref=e74]: 78 | <Card>
+                - generic [ref=e76]: 79 | <CardContent className="p-6 text-center">
+                - generic [ref=e78]: 80 | <p className="text-gray-500">No broadcasts yet. Create your first one!</p>
+            - generic [ref=e79]:
+              - generic [ref=e80]:
+                - paragraph [ref=e81]:
+                  - text: Call Stack
+                  - generic [ref=e82]: "13"
+                - button "Show 12 ignore-listed frame(s)" [ref=e83] [cursor=pointer]:
+                  - text: Show 12 ignore-listed frame(s)
+                  - img [ref=e84] [cursor=pointer]
+              - generic [ref=e86]:
+                - generic [ref=e87]:
+                  - text: BroadcastsPage
+                  - button "Open BroadcastsPage in editor" [ref=e88] [cursor=pointer]:
+                    - img [ref=e89] [cursor=pointer]
+                - generic [ref=e91]: app/dashboard/broadcasts/page.tsx (77:21)
+        - generic [ref=e92]:
+          - generic [ref=e93]: "1"
+          - generic [ref=e94]: "2"
+    - generic [ref=e99] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e100] [cursor=pointer]:
+        - img [ref=e101] [cursor=pointer]
+      - generic [ref=e104] [cursor=pointer]:
+        - button "Open issues overlay" [ref=e105] [cursor=pointer]:
+          - generic [ref=e106] [cursor=pointer]:
+            - generic [ref=e107] [cursor=pointer]: "0"
+            - generic [ref=e108] [cursor=pointer]: "1"
+          - generic [ref=e109] [cursor=pointer]: Issue
+        - button "Collapse issues badge" [ref=e110] [cursor=pointer]:
+          - img [ref=e111] [cursor=pointer]
+  - 'heading "Application error: a client-side exception has occurred while loading localhost (see the browser console for more information)." [level=2] [ref=e115]'
+```

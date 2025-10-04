@@ -1,0 +1,53 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [active]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - navigation [ref=e7]:
+            - button "previous" [disabled] [ref=e8]:
+              - img "previous" [ref=e9]
+            - generic [ref=e11]:
+              - generic [ref=e12]: 1/
+              - generic [ref=e13]: "1"
+            - button "next" [disabled] [ref=e14]:
+              - img "next" [ref=e15]
+          - img
+        - generic [ref=e17]:
+          - link "Next.js 15.5.2 (stale) Webpack" [ref=e18]:
+            - /url: https://nextjs.org/docs/messages/version-staleness
+            - img [ref=e19]
+            - generic "There is a newer version (15.5.4) available, upgrade recommended!" [ref=e21]: Next.js 15.5.2 (stale)
+            - generic [ref=e22]: Webpack
+          - img
+      - dialog "Runtime TypeError" [ref=e24]:
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e31]: Runtime TypeError
+            - generic [ref=e32]:
+              - button "Copy Error Info" [ref=e33] [cursor=pointer]:
+                - img [ref=e34] [cursor=pointer]
+              - button "No related documentation found" [disabled] [ref=e36]:
+                - img [ref=e37]
+              - link "Learn more about enabling Node.js inspector for server code with Chrome DevTools" [ref=e39]:
+                - /url: https://nextjs.org/docs/app/building-your-application/configuring/debugging#server-side-code
+                - img [ref=e40]
+          - paragraph [ref=e52]: undefined is not an object (evaluating 'broadcasts.length')
+        - generic [ref=e54]:
+          - generic [ref=e55]: "1"
+          - generic [ref=e56]: "2"
+    - generic [ref=e61] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e62] [cursor=pointer]:
+        - img [ref=e63] [cursor=pointer]
+      - generic [ref=e68] [cursor=pointer]:
+        - button "Open issues overlay" [ref=e69] [cursor=pointer]:
+          - generic [ref=e70] [cursor=pointer]:
+            - generic [ref=e71] [cursor=pointer]: "0"
+            - generic [ref=e72] [cursor=pointer]: "1"
+          - generic [ref=e73] [cursor=pointer]: Issue
+        - button "Collapse issues badge" [ref=e74] [cursor=pointer]:
+          - img [ref=e75] [cursor=pointer]
+  - 'heading "Application error: a client-side exception has occurred while loading localhost (see the browser console for more information)." [level=2] [ref=e79]'
+```
